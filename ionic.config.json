@@ -1,0 +1,7 @@
+{
+  "name": "evente-front",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
