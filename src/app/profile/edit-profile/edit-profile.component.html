@@ -1,0 +1,19 @@
+<ion-content [fullscreen]="true">
+  <div class="flex flex-col items-center justify-center h-full">
+      <p class="font-semibold text-lg">Editar perfil</p>
+      <form [formGroup]="updateProfileForm" (ngSubmit)="updateProfile()" class="flex flex-col items">
+        <div class="bg-gray-200 p-4 flex flex-col my-6 rounded-lg">
+          <label>Cambiar nombre:</label>
+          <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="text" placeholder="Escriba su nombre" formControlName="new_name"></ion-input>
+          <label>Cambiar apellido:</label>
+          <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="text" placeholder="Escriba su apellido" formControlName="new_surname"></ion-input>
+          <label>Cambiar contraseña:</label>
+          <div class="flex items-center bg-white px-2 rounded-md border-solid border-2 border-black mb-2">
+            <ion-input class="h-8" type="password" placeholder="Escriba su contraseña" formControlName="new_password"></ion-input>
+            <span><ion-icon class="w-6 h-6 pt-1" name="eye-outline"></ion-icon></span>
+          </div>
+        </div>
+        <button class="bg-black text-white font-bold rounded-lg p-3" [disabled]="updateProfileForm.pristine" >Guardar cambios</button>
+      </form>
+  </div>
+</ion-content>

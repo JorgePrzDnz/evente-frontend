@@ -24,6 +24,10 @@ export class LoginComponent {
     })
   }
 
+  public redirectToRegister(){
+    this.router.navigate(['/auth/register'])
+  }
+
   public login() {
 
     if(this.loginForm.invalid) {
@@ -38,6 +42,7 @@ export class LoginComponent {
   private handleUserSetting(response: LoginResponse) {
     this.authService.setToken(response.token)
     console.log(response.token)
+    this.router.navigate(['/tabs/tab1'])
   }
 
 }

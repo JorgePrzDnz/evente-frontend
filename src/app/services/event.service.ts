@@ -1,15 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { EventsPerCategoryResponse } from "../models/event";
+import { Api } from "./api.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class EventService {
-  constructor(
-    private http: HttpClient
-  ) {}
+export class EventService extends Api{
 
-  public getAll(){
-    return this.http.get('http://127.0.0.1:8000/api/events')
+  public getCategory(id: number){
+    return this.get<EventsPerCategoryResponse>("/events/category/"+ id)
   }
 }

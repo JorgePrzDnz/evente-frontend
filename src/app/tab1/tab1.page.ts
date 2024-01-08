@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EventService } from '../services/event.service';
 
 @Component({
@@ -6,18 +6,21 @@ import { EventService } from '../services/event.service';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit{
 
+  public nextEvents: any;
+  public slideOpts: any;
   constructor(
     private eventService: EventService,
   ){}
 
-  public getEvents(){
-    this.eventService.getAll().subscribe(response => {
-      console.log(response)
-    }, error => {
-      console.log("error");
-    });
+  ngOnInit() {
+    this.eventService.getCategory(1).subscribe(response => {
+          this.nextEvents = response.events.data
+          console.log(this.nextEvents)
+        }, error => {
+          console.log("error");
+        });
   }
 
 }

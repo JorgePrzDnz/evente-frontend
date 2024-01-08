@@ -5,5 +5,52 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <div class="flex flex-col items-center m-4">
+    <div class="flex flex-col items-center">
+      <div class="bg-gray-200 border-2 border-black rounded-full p-4 w-24 h-24 flex justify-center items-center">
+        <p class="text-4xl">MG</p>
+      </div>
+      <p>Marta García</p>
+    </div>
+
+
+    <div class="py-6 flex">
+      <div class="grid grid-cols-2">
+        <a class="col1" [routerLink]="['/profile','editProfile']">
+          <div class="bg-gray-200 h-32 w-32 rounded-xl">
+            <img class="icon" src="../../assets/images/editProfileIcon.svg">
+          </div>
+          <div>
+            <h2 class="text-sm text-principal text-center">Editar perfil</h2>
+          </div>
+        </a>
+
+        <div class="col2">
+          <div class="bg-gray-200 h-32 w-32 rounded-xl">
+            <img class="icon" src="../../assets/images/myBuysIcon.svg">
+          </div>
+          <div>
+            <h2 class="text-sm text-principal text-center">Mis compras</h2>
+          </div>
+        </div>
+
+        <div class="col1 mt-4">
+          <div class="bg-gray-200 h-32 w-32 rounded-xl">
+            <img class="icon" src="../../assets/images/paymentMethodIcon.svg">
+          </div>
+          <div>
+            <h2 class="text-sm text-principal text-center">Método de pago</h2>
+          </div>
+        </div>
+
+        <div class="col2 mt-4 pr-12">
+          <div class="bg-gray-200 h-32 w-32 rounded-xl">
+            <img class="icon" src="../../assets/images/myFavsIcon.svg">
+          </div>
+
+          <h2 class="text-sm text-principal text-center">Mis favoritos</h2>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>
