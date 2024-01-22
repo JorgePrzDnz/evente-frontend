@@ -17,7 +17,7 @@
     <div class="py-6 flex">
       <div class="grid grid-cols-2">
         <a class="col1" [routerLink]="['/profile','editProfile']">
-          <div class="bg-gray-200 h-32 w-32 rounded-xl">
+          <div class="bg-gray-200 h-24 w-24 rounded-xl">
             <img class="icon" src="../../assets/images/editProfileIcon.svg">
           </div>
           <div>
@@ -26,7 +26,7 @@
         </a>
 
         <div class="col2">
-          <div class="bg-gray-200 h-32 w-32 rounded-xl">
+          <div class="bg-gray-200 h-24 w-24 rounded-xl">
             <img class="icon" src="../../assets/images/myBuysIcon.svg">
           </div>
           <div>
@@ -35,7 +35,7 @@
         </div>
 
         <div class="col1 mt-4">
-          <div class="bg-gray-200 h-32 w-32 rounded-xl">
+          <div [routerLink]="['/profile','paymentMethod']" class="bg-gray-200 h-24 w-24 rounded-xl">
             <img class="icon" src="../../assets/images/paymentMethodIcon.svg">
           </div>
           <div>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="col2 mt-4 pr-12">
-          <div class="bg-gray-200 h-32 w-32 rounded-xl">
+          <div class="bg-gray-200 h-24 w-24 rounded-xl">
             <img class="icon" src="../../assets/images/myFavsIcon.svg">
           </div>
 
@@ -52,5 +52,6 @@
         </div>
       </div>
     </div>
+    <button (click)="logOut()" class="bg-black text-white font-bold rounded-lg p-3">Cerrar sesión</button>
   </div>
 </ion-content>

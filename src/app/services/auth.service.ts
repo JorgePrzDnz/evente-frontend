@@ -20,4 +20,8 @@ export class Auth extends Api{
     return this.put<UpdateProfileResponse>('/profile/edit', updateProfileCredentials)
   }
 
+  public logout(){
+    localStorage.removeItem('EVE-TOKEN');
+    Api.token = null;
+  }
 }

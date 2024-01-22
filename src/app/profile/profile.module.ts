@@ -4,12 +4,13 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ProfileRoutingModule } from './profile-routing.module'
+import { PaymentMethodComponent } from '../profile/payment-method/payment-method.component';
 
 
 
 
 @NgModule({
-  declarations: [EditProfileComponent],
+  declarations: [EditProfileComponent, PaymentMethodComponent],
   imports: [
     CommonModule,
     IonicModule,
