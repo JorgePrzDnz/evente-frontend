@@ -36,6 +36,12 @@ export class Api {
     })
   }
 
+  delete<T>(uri: string, body: any) {
+    return this.http.delete<T>(this.host + uri, {
+      headers: this.getHeaders(),
+    })
+  }
+
   private getHeaders() {
 
     let headers: { Accept: string; Authorization?: string } = {

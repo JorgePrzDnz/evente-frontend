@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../services/post.service';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
+
 
 
 @Component({
@@ -10,24 +12,37 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
 })
 export class Tab2Page implements OnInit{
   public posts: any;
+  public likedPosts: any;
+  public likedPost: any;
   public page: any;
   public finishedDownloading: boolean = false;
+  public isLiked: any;
+  public like: any;
 
   constructor(
     private postService: PostService,
+    private loadingController: LoadingController,
   ) {}
 
   ngOnInit() {
+    this.presentLoading()
     this.finishedDownloading = false
     this.getPosts()
+  }
 
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Cargando publicaciones',
+      spinner: 'bubbles'
+    });
+    await loading.present();
   }
 
   public getPosts(){
     this.postService.getPosts().subscribe(response => {
       this.posts = response.posts.data
       this.page = response.posts.current_page+1
-      console.log(this.page)
+      this.loadingController.dismiss();
     }, error => {
       console.log("error");
     });
@@ -52,5 +67,25 @@ export class Tab2Page implements OnInit{
     }else{
       $event.target.disabled = true;
     }
+  }
+
+  public unlikePost(postid: number) {
+    this.postService.unlikePost(postid).subscribe(response => {
+      const postUnliked = this.filterPostById(postid)
+      postUnliked.is_liked = false;
+      this.posts = [...this.posts]
+    });
+  }
+
+  public likePost(postid: number) {
+    this.postService.likePost(postid).subscribe(response => {
+      const postLiked = this.filterPostById(postid)
+      postLiked.is_liked = true;
+      this.posts = [...this.posts]
+    });
+  }
+
+  private filterPostById(postid: number){
+    return this.posts.find((post: any) => postid === post.id)
   }
 }

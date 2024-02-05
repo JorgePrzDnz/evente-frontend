@@ -1,7 +1,6 @@
 import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UpdateProfileResponse } from 'src/app/models/auth';
 import { Auth } from 'src/app/services/auth.service';
 
 @Component({
@@ -30,7 +29,7 @@ export class EditProfileComponent  {
       console.log('botón desactivado')
     }else{
       this.authService.updateProfile(this.updateProfileForm.value).subscribe((response) => {
-        this.router.navigate(['/tabs/tab3'])
+        this.router.navigate(['/tabs/tab2'])
       })
     }
   }

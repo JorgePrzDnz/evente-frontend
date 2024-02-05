@@ -1,11 +1,15 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="border-2 border-black">
+    <ion-img src="../../../assets/images/Logo.svg" alt="Logo" class="w-12 h-12 mx-auto my-3"></ion-img>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Tab 2</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <!-- <button (click)="getPosts()">Dame posts</button> -->
 
   <div class="pt-8 min-h-screen">
         <div *ngFor="let post of posts">
@@ -17,7 +21,8 @@
             <div [innerHTML]="post.description" class="mx-12 my-4 text-sm"></div>
             <div class="flex items-center justify-between mx-12">
               <p class="text-xs">{{post.published_at_formatted}}</p>
-              <img class="h-6 w-6" src="../../assets/images/myFavsIcon.svg">
+              <img *ngIf="post.is_liked == false" (click)="likePost(post.id)" class="h-6 w-6" src="../../assets/images/likeIcon.svg">
+              <img *ngIf="post.is_liked == true" (click)="unlikePost(post.id)" class="h-6 w-6" src="../../assets/images/unlikeIcon.svg">
             </div>
           </div>
         </div>

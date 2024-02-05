@@ -8,6 +8,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
+import { EventComponent } from '../tab1/event/event.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
   ],
-  declarations: [Tab1Page],
+  declarations: [Tab1Page, EventComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
   ]

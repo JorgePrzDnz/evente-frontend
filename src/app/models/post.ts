@@ -17,3 +17,13 @@ export interface PostsModel {
   next_page_url: string;
   data: Post[];
 }
+
+export interface LikeResponse {
+  id: string;
+  isLiked: boolean;
+}
+
+export interface LikedPostsResponse {
+  status: boolean;
+  posts_liked: Post [];
+}

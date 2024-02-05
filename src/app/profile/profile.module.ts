@@ -5,12 +5,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ProfileRoutingModule } from './profile-routing.module'
 import { PaymentMethodComponent } from '../profile/payment-method/payment-method.component';
+import { MyFavsComponent } from './my-favs/my-favs.component';
 
 
 
 
 @NgModule({
-  declarations: [EditProfileComponent, PaymentMethodComponent],
+  declarations: [EditProfileComponent, PaymentMethodComponent, MyFavsComponent],
   imports: [
     CommonModule,
     IonicModule,

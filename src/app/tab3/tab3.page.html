@@ -1,3 +1,9 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="border-2 border-black">
+    <ion-img src="../../../assets/images/Logo.svg" alt="Logo" class="w-12 h-12 mx-auto my-3"></ion-img>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -8,9 +14,13 @@
   <div class="flex flex-col items-center m-4">
     <div class="flex flex-col items-center">
       <div class="bg-gray-200 border-2 border-black rounded-full p-4 w-24 h-24 flex justify-center items-center">
-        <p class="text-4xl">MG</p>
+        <p class="text-4xl">{{userNameFirstLetter}}</p>
+        <p class="text-4xl pl-1">{{userSurnameFirstLetter}}</p>
       </div>
-      <p>Marta García</p>
+      <div class="flex">
+        <p>{{userName}}</p>
+        <p class="pl-1">{{userSurname}}</p>
+      </div>
     </div>
 
 
@@ -44,8 +54,8 @@
         </div>
 
         <div class="col2 mt-4 pr-12">
-          <div class="bg-gray-200 h-24 w-24 rounded-xl">
-            <img class="icon" src="../../assets/images/myFavsIcon.svg">
+          <div [routerLink]="['/profile','myFavs']" class="bg-gray-200 h-24 w-24 rounded-xl">
+            <img class="icon" src="../../assets/images/likeIcon.svg">
           </div>
 
           <h2 class="text-sm text-principal text-center">Mis favoritos</h2>

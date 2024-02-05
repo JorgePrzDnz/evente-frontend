@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../services/event.service';
+import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-tab1',
@@ -18,9 +21,12 @@ export class Tab1Page implements OnInit{
 
   constructor(
     private eventService: EventService,
+    private loadingController: LoadingController,
+    private router: Router,
   ){}
 
   ngOnInit() {
+    this.presentLoading()
     this.eventService.getCategory(1).subscribe(response => {
       console.log(response.events.data)
           this.nextEvents = response.events.data
@@ -43,9 +49,22 @@ export class Tab1Page implements OnInit{
           if(this.nextShows.length === 0){
             this.noShows = true;
           }
+          this.loadingController.dismiss();
         }, error => {
           console.log("error");
         });
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Cargando eventos',
+      spinner: 'bubbles'
+    });
+    await loading.present();
+  }
+
+  public eventDetail(eventId: any){
+    this.router.navigate(['/tabs/tab1', eventId])
   }
 
 }

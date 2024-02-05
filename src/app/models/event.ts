@@ -4,8 +4,11 @@ export interface Event {
   description: string,
   media: string[],
   start_at: Date,
+  place: string,
+  price: number,
   published_at: Date,
-  images_url: string[]
+  images_url: string[],
+  published_at_formatted: string
 
 }
 
@@ -15,4 +18,8 @@ export interface EventsPerCategoryResponse {
 
 export interface PaginatedEvents{
   data: Event[]
+}
+
+export interface EventByIdResponse {
+  event: Event
 }
