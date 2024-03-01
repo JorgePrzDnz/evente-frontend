@@ -35,6 +35,8 @@ export class MyFavsComponent  implements OnInit {
     this.postService.getLikedPosts().subscribe(response => {
       this.likedPosts = response.posts_liked;
       this.loadingController.dismiss();
+    }, error => {
+      console.log("error");
     });
   }
 

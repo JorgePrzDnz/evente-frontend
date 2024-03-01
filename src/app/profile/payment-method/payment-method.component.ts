@@ -23,6 +23,10 @@ export class PaymentMethodComponent  {
   public cardNumber: any;
   public expiryDate: any;
   public cvv: any;
+  public noAddData: boolean = true;
+  public wrongPayment: boolean = false;
+  public wrongPaymentAdd: boolean = false;
+
 
   constructor(
     private fb: FormBuilder,
@@ -32,17 +36,17 @@ export class PaymentMethodComponent  {
     private router: Router,
   ) {
     this.addPaymentMethodForm = this.fb.group({
-      ownerName: ['',[Validators.required]],
-      cardNumber: ['',[Validators.required]],
-      expiryDate: ['', [Validators.required]],
-      bank: ['', [Validators.required]],
+      ownerName: [null,[Validators.required]],
+      cardNumber: [null,[Validators.required, Validators.minLength(16), Validators.maxLength(19)]],
+      expiryDate: [null, [Validators.required]],
+      bank: [null, [Validators.required]],
     })
 
     this.editPaymentMethodForm = this.fb2.group({
-      ownerName: [''],
-      cardNumber: [''],
-      expiryDate: [''],
-      bank: [''],
+      ownerName: [null,[Validators.required]],
+      cardNumber: [null,[Validators.required, Validators.minLength(16), Validators.maxLength(19)]],
+      expiryDate: [null, [Validators.required]],
+      bank: [null, [Validators.required]],
     })
    }
 
@@ -83,20 +87,20 @@ export class PaymentMethodComponent  {
 
   public addPaymentMethod(){
     this.createPM = true
-
   }
 
   public createPaymentMethod(){
     if(this.addPaymentMethodForm.invalid) {
-      return
+      this.wrongPaymentAdd = true
+    }else{
+      this.userService.createPaymentMethod(this.addPaymentMethodForm.value).subscribe(response => {
+        this.wrongPayment = false
+        this.router.navigate(['/tabs/tab3'])
+      }, error => {
+        this.wrongPayment = true
+        this.wrongPaymentAdd = true
+      });
     }
-
-    this.userService.createPaymentMethod(this.addPaymentMethodForm.value).subscribe(response => {
-      console.log(response)
-    }, error => {
-      console.log("error");
-    });
-    this.router.navigate(['/tabs/tab3'])
   }
   public activeEditPaymentMethod(){
     this.hasPM = false
@@ -142,6 +146,14 @@ export class PaymentMethodComponent  {
       }
       default:
         this.cardURL = '../../../assets/images/Logo.svg';
+    }
+  }
+
+  public checkCredentials(){
+    if(this.addPaymentMethodForm.value['ownerName'] === '' && this.addPaymentMethodForm.value['cardNumber'] === '' && this.addPaymentMethodForm.value['expiryDate'] === '' && this.addPaymentMethodForm.value['bank'] === ''){
+      this.noAddData = true
+    }else{
+      this.noAddData = false
     }
   }
 }

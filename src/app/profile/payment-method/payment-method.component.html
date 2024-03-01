@@ -19,17 +19,25 @@
         <form [formGroup]="addPaymentMethodForm" (ngSubmit)="createPaymentMethod()" class="flex flex-col items">
           <div class="bg-[#D9D9D9] p-4 flex flex-col rounded-lg">
             <label>Nombre del Titular:</label>
-            <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="text" placeholder="Escriba su nombre completo" formControlName="ownerName"></ion-input>
+            <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="text" placeholder="Escriba su nombre completo" (keyup)="checkCredentials()" formControlName="ownerName"></ion-input>
             <label>Nº Tarjeta:</label>
-            <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="number" placeholder="Escriba su nº de tarjeta" formControlName="cardNumber"></ion-input>
+            <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="text" placeholder="Escriba su nº de tarjeta" (keyup)="checkCredentials()" formControlName="cardNumber"></ion-input>
             <div class="flex">
-              <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="text" placeholder="MM/AA" formControlName="expiryDate"></ion-input>
-              <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="text" placeholder="Tipo tarjeta" formControlName="bank"></ion-input>
+              <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="text" placeholder="MM/AA" (keyup)="checkCredentials()" formControlName="expiryDate"></ion-input>
+              <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="text" placeholder="Tipo tarjeta" (keyup)="checkCredentials()" formControlName="bank"></ion-input>
             </div>
-            <button class="bg-black text-white font-bold rounded-lg p-3" >Añadir</button>
+            <button class="bg-black text-white font-bold rounded-lg p-3" [ngClass]="{'bg-gray-200': noAddData,'bg-black ': !noAddData}" [disabled]="addPaymentMethodForm.pristine">Añadir</button>
           </div>
         </form>
       </div>
+      <div class="bg-red-400 text-white flex p-2 justify-center mt-4" [ngClass]="{'bg-gray-200': wrongPaymentAdd,'invisible': !wrongPaymentAdd}">
+        <p>Los datos introducidos no son correctos</p>
+        <ion-img class="pl-2" src="../../../assets/images/errorIcon.svg" alt="error"></ion-img>
+      </div>
+      <!-- <div *ngIf="createPM == true && hasPM == false && editPM == false" class="bg-red-400 text-white flex p-2 justify-center mt-4" [ngClass]="{'bg-gray-200': wrongPayment,'invisible': !wrongPayment}">
+        <p>Los datos introducidos no son correctos</p>
+        <ion-img class="pl-2" src="../../../assets/images/errorIcon.svg" alt="error"></ion-img>
+      </div> -->
       <div *ngIf="createPM == false && hasPM == true && editPM == false" class="relative w-80 h-52 flex mx-6" style="background-image: url('../../assets/images/creditCard.svg')">
           <div class="p-4 flex flex-col rounded-lg w-80">
             <div class="flex items-center justify-between mt-16">

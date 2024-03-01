@@ -11,6 +11,11 @@ import { Auth } from 'src/app/services/auth.service';
 export class EditProfileComponent  {
 
   public updateProfileForm: FormGroup;
+  public pwdText: any;
+  public pwdIcon: any;
+  public noData: boolean = true;
+  public wrongEditProfile: boolean = false;
+
 
   constructor(
     private fb: FormBuilder,
@@ -26,12 +31,33 @@ export class EditProfileComponent  {
 
   public updateProfile(){
     if(this.updateProfileForm.value['new_name'] === '' && this.updateProfileForm.value['new_surname'] === '' && this.updateProfileForm.value['new_password'] === '' ){
-      console.log('botón desactivado')
+      this.wrongEditProfile = true
     }else{
       this.authService.updateProfile(this.updateProfileForm.value).subscribe((response) => {
+        this.wrongEditProfile = false
         this.router.navigate(['/tabs/tab2'])
       })
     }
   }
 
+  public showPassword(passwordInput: any, passwordIcon: any){
+    this.pwdText = passwordInput
+    this.pwdIcon = passwordIcon
+    if(passwordInput.type === 'password'){
+      passwordInput.type = 'text';
+      passwordIcon.name = 'eye-off-outline';
+
+    }else{
+      passwordInput.type = 'password';
+      passwordIcon.name = 'eye-outline';
+    }
+  }
+
+  public checkCredentials(){
+    if(this.updateProfileForm.value['new_name'] === '' && this.updateProfileForm.value['new_surname'] === '' && this.updateProfileForm.value['new_password'] === '' ){
+      this.noData = true
+    }else{
+      this.noData = false
+    }
+  }
 }

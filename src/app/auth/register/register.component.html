@@ -1,26 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="border-2 border-black">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-img src="../../../assets/images/Logo.svg" alt="Logo" class="logo w-12 h-12 my-3"></ion-img>
+  </ion-toolbar>
+</ion-header>
 <ion-content [fullscreen]="true">
   <div class="flex flex-col items-center justify-center h-full">
-    <ion-img src="../../../assets/images/Logo.svg" alt="Logo"></ion-img>
       <form [formGroup]="registerForm" (ngSubmit)="register()" class="flex flex-col items">
         <div class="bg-gray-200 p-4 flex flex-col my-6 rounded-lg">
           <label>Nombre:</label>
-          <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="text" placeholder="Escriba su nombre" formControlName="name"></ion-input>
+          <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="text" placeholder="Escriba su nombre" (keyup)="checkCredentials()" formControlName="name"></ion-input>
           <label>Apellido:</label>
-          <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="text" placeholder="Escriba su apellido" formControlName="surname"></ion-input>
+          <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="text" placeholder="Escriba su apellido" (keyup)="checkCredentials()" formControlName="surname"></ion-input>
           <label>Correo:</label>
-          <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="text" placeholder="Escriba su correo" formControlName="email"></ion-input>
+          <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="text" placeholder="Escriba su correo" (keyup)="checkCredentials()" formControlName="email"></ion-input>
           <label>Contraseña:</label>
           <div class="flex items-center bg-white px-2 rounded-md border-solid border-2 border-black mb-2">
-            <ion-input class="h-8" type="password" placeholder="Escriba su contraseña" formControlName="password"></ion-input>
-            <span><ion-icon class="w-6 h-6 pt-1" name="eye-outline"></ion-icon></span>
+            <ion-input class="h-8" type="password" #passwordInput placeholder="Escriba su contraseña" (keyup)="checkCredentials()" formControlName="password"></ion-input>
+            <span><ion-icon class="w-6 h-6 pt-1" #passwordIcon (click)="showPassword(passwordInput, passwordIcon)" name="eye-outline"></ion-icon></span>
           </div>
           <label>Confirmar contraseña:</label>
           <div class="flex items-center bg-white px-2 rounded-md border-solid border-2 border-black mb-2">
-            <ion-input class="h-8" type="password" placeholder="Confirme su contraseña" formControlName="password_confirmation"></ion-input>
-            <span><ion-icon class="w-6 h-6 pt-1" name="eye-outline"></ion-icon></span>
+            <ion-input class="h-8" type="password" #confirmPasswordInput placeholder="Confirme su contraseña" (keyup)="checkCredentials()" formControlName="password_confirmation"></ion-input>
+            <span><ion-icon class="w-6 h-6 pt-1" name="eye-outline" #confirmPasswordIcon (click)="showConfirmPassword(confirmPasswordInput, confirmPasswordIcon)"></ion-icon></span>
           </div>
         </div>
-        <button class="bg-black text-white font-bold rounded-lg p-3">Registrarse</button>
+        <button class="bg-black text-white font-bold rounded-lg p-3" [ngClass]="{'bg-gray-200': noData,'bg-black ': !noData}" [disabled]="registerForm.pristine">Registrarse</button>
+        <div class="bg-red-400 text-white flex p-2 justify-center mt-4" [ngClass]="{'bg-gray-200': wrongRegister,'invisible': !wrongRegister}">
+          <p>Los datos introducidos no son correctos</p>
+          <ion-img class="pl-2" src="../../../assets/images/errorIcon.svg" alt="error"></ion-img>
+        </div>
       </form>
   </div>
 </ion-content>

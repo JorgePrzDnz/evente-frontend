@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 export class Tab1Page implements OnInit{
 
   public nextEvents: any;
+  public CategoryEvents: any;
+  public CategoryConcerts: any;
+  public CategoryShows: any;
   public nextConcerts: any;
   public nextShows: any;
   public slideOpts: any;
@@ -28,31 +31,54 @@ export class Tab1Page implements OnInit{
   ngOnInit() {
     this.presentLoading()
     this.eventService.getCategory(1).subscribe(response => {
-      console.log(response.events.data)
-          this.nextEvents = response.events.data
-          if(this.nextEvents.length === 0){
-            this.noEvents = true;
+      this.CategoryConcerts = response.events.data
+      if(response.events.data.length === 0){
+        this.noConcerts = true;
+      }else{
+        let firstConcerts = []
+        for (let i = 0; i <= 4; i++){
+          if(response.events.data[i]){
+            firstConcerts[i] = response.events.data[i]
           }
-        }, error => {
-          console.log("error");
-        });
+        }
+        this.nextConcerts = firstConcerts
+      }
+    }, error => {
+      console.log("error");
+    });
     this.eventService.getCategory(2).subscribe(response => {
-          this.nextConcerts = response.events.data
-          if(this.nextConcerts.length === 0){
-            this.noConcerts = true;
+      this.CategoryEvents = response.events.data
+      if(response.events.data.length === 0){
+        this.noEvents = true;
+      }else{
+        let firstEvents = []
+        for (let i = 0; i <= 4; i++){
+          if(response.events.data[i]){
+            firstEvents[i] = response.events.data[i]
           }
-        }, error => {
-          console.log("error");
-        });
+        }
+        this.nextEvents = firstEvents
+      }
+    }, error => {
+      console.log("error");
+    });
     this.eventService.getCategory(3).subscribe(response => {
-          this.nextShows = response.events.data
-          if(this.nextShows.length === 0){
-            this.noShows = true;
+      this.CategoryShows = response.events.data
+      if(response.events.data.length === 0){
+        this.noShows = true;
+      }else{
+        let firstShows = []
+        for (let i = 0; i <= 4; i++){
+          if(response.events.data[i]){
+            firstShows[i] = response.events.data[i]
           }
-          this.loadingController.dismiss();
-        }, error => {
-          console.log("error");
-        });
+        }
+        this.nextShows = firstShows
+      }
+      this.loadingController.dismiss();
+    }, error => {
+      console.log("error");
+    });
   }
 
   async presentLoading() {
@@ -65,6 +91,10 @@ export class Tab1Page implements OnInit{
 
   public eventDetail(eventId: any){
     this.router.navigate(['/tabs/tab1', eventId])
+  }
+
+  public allEventsDetail(categoryId: number){
+    this.router.navigate(['/tabs/tab1/allEvents', categoryId])
   }
 
 }

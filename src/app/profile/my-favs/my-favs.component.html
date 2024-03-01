@@ -24,7 +24,8 @@
       </div>
     </div>
   </div>
-  <div *ngIf="likedPosts?.length == 0" class="flex justify-center items-center">
-    <p>No has dado me gusta a ninguna publicación.</p>
+  <div *ngIf="likedPosts?.length == 0" class="flex flex-col justify-center items-center w-full h-full text-center">
+    <ion-img class="w-60" src="../../../assets/images/notFound.svg" alt="error"></ion-img>
+    <p class="text-lg mx-auto font-semibold mt-3">No has dado me gusta a ninguna publicación</p>
   </div>
 </ion-content>

@@ -7,14 +7,14 @@
 <ion-content [fullscreen]="true">
   <div class="flex flex-col">
     <div class="flex flex-col h-[1/3] p-3">
-      <p class="text-xl font-semibold">Próximos eventos</p>
+      <p class="text-lg font-semibold">Próximos eventos</p>
       <div *ngIf="!noEvents">
-        <swiper-container [slidesPerView]="4.5">
-          <div *ngFor="let event of nextEvents">
-            <swiper-slide><img (click)="eventDetail(event.id)" alt="cviene" src="{{event.images_url[0]?? '../../assets/images/proximamente.jpg'}}" class="w-20 h-36 border-2 border-black rounded-2xl mx-2"></swiper-slide>
-          </div>
-          <swiper-slide class="flex items-center ml-1 w-20 h-36">
-            <button class="botton bg-gray-200 px-4 py-2 font-semibold rounded-lg"><p class="text-3xl">+</p></button>
+        <swiper-container [slidesPerView]="3.5">
+          <swiper-slide *ngFor="let event of nextEvents">
+            <img (click)="eventDetail(event.id)" alt="cviene" src="{{event.images_url[0]?? '../../assets/images/proximamente.jpg'}}" class="w-20 h-36 border-2 border-black rounded-2xl mx-2">
+          </swiper-slide>
+          <swiper-slide *ngIf="CategoryEvents?.length > 4" class="flex items-center ml-1 w-20 h-36">
+            <button (click)="allEventsDetail(2)" class="botton bg-gray-200 px-4 py-2 ml-1 font-semibold rounded-lg"><p class="text-3xl">+</p></button>
           </swiper-slide>
         </swiper-container>
       </div>
@@ -23,37 +23,35 @@
       </div>
     </div>
     <div class="flex flex-col h-[1/3] p-3">
-      <p class="text-xl font-semibold">Próximos Conciertos</p>
-      <div>
-        <div *ngIf="noConcerts === false">
-          <swiper-container [slidesPerView]="4.5">
-            <div *ngFor="let concert of nextConcerts">
-              <swiper-slide><img alt="cviene" src="{{concert.images_url[0]?? '../../assets/images/proximamente.jpg'}}" class="w-20 h-36 border-2 border-black rounded-2xl mx-2"></swiper-slide>
-            </div>
-            <swiper-slide class="flex justify-center items-center w-20 h-36">
-              <button class="botton bg-gray-200 ml-1 px-4 py-2 font-semibold rounded-lg"><p class="text-3xl">+</p></button>
-            </swiper-slide>
-          </swiper-container>
-        </div>
-        <div *ngIf="noConcerts === true" class="my-6 text-lg flex justify-center">
-          <p>No hay conciertos próximamente</p>
-        </div>
-      </div>
-    </div>
-    <div class="flex flex-col h-[1/3] p-3">
-      <p class="text-xl font-semibold">Próximos Espectáculos</p>
-      <div *ngIf="noShows === false">
-        <swiper-container [slidesPerView]="4.5">
-          <div *ngFor="let show of nextShows">
-            <swiper-slide><img alt="cviene" src="{{show.images_url[0]?? '../../assets/images/proximamente.jpg'}}" class="w-20 h-36 border-2 border-black rounded-2xl mx-2"></swiper-slide>
-          </div>
-          <swiper-slide class="flex justify-center items-center w-20 h-36">
-            <button class="botton bg-gray-200 ml-1 px-4 py-2 font-semibold rounded-lg"><p class="text-3xl">+</p></button>
+      <p class="text-lg font-semibold">Próximos Conciertos</p>
+      <div *ngIf="!noConcerts">
+        <swiper-container [slidesPerView]="3.5">
+          <swiper-slide *ngFor="let concert of nextConcerts">
+            <img (click)="eventDetail(concert.id)" alt="cviene" src="{{concert.images_url[0]?? '../../assets/images/proximamente.jpg'}}" class="w-20 h-36 border-2 border-black rounded-2xl mx-2">
+          </swiper-slide>
+          <swiper-slide *ngIf="CategoryConcerts?.length > 4" class="flex items-center ml-1 w-20 h-36">
+            <button (click)="allEventsDetail(1)" class="botton bg-gray-200 px-4 py-2 ml-1 font-semibold rounded-lg"><p class="text-3xl">+</p></button>
           </swiper-slide>
         </swiper-container>
       </div>
-      <div *ngIf="noShows === true" class="my-6 text-lg flex justify-center">
-        <p>No hay espactáculos próximamente</p>
+      <div *ngIf="noConcerts === true" class="my-6 font-semibold text-lg flex justify-center">
+        <p>No hay espectáculos próximamente</p>
+      </div>
+    </div>
+    <div class="flex flex-col h-[1/3] p-3">
+      <p class="text-lg font-semibold">Próximos espectáculos</p>
+      <div *ngIf="!noShows">
+        <swiper-container [slidesPerView]="3.5">
+          <swiper-slide *ngFor="let show of nextShows">
+            <img (click)="eventDetail(show.id)" alt="cviene" src="{{show.images_url[0]?? '../../assets/images/proximamente.jpg'}}" class="w-20 h-36 border-2 border-black rounded-2xl mx-2">
+          </swiper-slide>
+          <swiper-slide *ngIf="CategoryShows?.length > 4" class="flex items-center ml-1 w-20 h-36">
+            <button (click)="allEventsDetail(3)" class="botton bg-gray-200 px-4 py-2 ml-1 font-semibold rounded-lg"><p class="text-3xl">+</p></button>
+          </swiper-slide>
+        </swiper-container>
+      </div>
+      <div *ngIf="noShows === true" class="my-6 font-semibold text-lg flex justify-center">
+        <p>No hay espectáculos próximamente</p>
       </div>
     </div>
   </div>

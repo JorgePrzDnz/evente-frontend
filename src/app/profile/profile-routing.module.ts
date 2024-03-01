@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PaymentMethodComponent } from './payment-method/payment-method.component';
 import { MyFavsComponent } from './my-favs/my-favs.component';
+import { MyBuysComponent } from './my-buys/my-buys.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'myFavs',
     component: MyFavsComponent
+  },
+  {
+    path: 'myBuys',
+    component: MyBuysComponent
   },
 ]
 

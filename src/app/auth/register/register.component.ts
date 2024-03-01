@@ -12,6 +12,13 @@ import { Auth } from 'src/app/services/auth.service';
 export class RegisterComponent {
 
   public registerForm: FormGroup;
+  public pwdText: any;
+  public pwdIcon: any;
+  public pwdConfirmText: any;
+  public pwdConfirmIcon: any;
+  public noData: boolean = true;
+  public wrongRegister: boolean = false;
+
 
   constructor(
     private fb: FormBuilder,
@@ -30,17 +37,53 @@ export class RegisterComponent {
   public register() {
 
     if(this.registerForm.invalid) {
-      return
+      this.wrongRegister = true
     }
 
     this.authService.register(this.registerForm.value).subscribe((response) => {
       this.handleUserSetting(response)
-    })
+    }, error => {
+      this.wrongRegister = true
+    });
   }
 
   private handleUserSetting(response: RegisterResponse) {
     this.authService.setToken(response.token)
     console.log(response.token)
     this.router.navigate(['/tabs/tab1'])
+  }
+
+  public showPassword(passwordInput: any, passwordIcon: any){
+    this.pwdText = passwordInput
+    this.pwdIcon = passwordIcon
+    if(passwordInput.type === 'password'){
+      passwordInput.type = 'text';
+      passwordIcon.name = 'eye-off-outline';
+
+    }else{
+      passwordInput.type = 'password';
+      passwordIcon.name = 'eye-outline';
+    }
+  }
+
+  public showConfirmPassword(passwordInput: any, passwordIcon: any){
+    this.pwdConfirmText = passwordInput
+    this.pwdConfirmIcon = passwordIcon
+    if(passwordInput.type === 'password'){
+      passwordInput.type = 'text';
+      passwordIcon.name = 'eye-off-outline';
+
+    }else{
+      passwordInput.type = 'password';
+      passwordIcon.name = 'eye-outline';
+    }
+  }
+
+  public checkCredentials(){
+    if(this.registerForm.value['name'] === '' &&this.registerForm.value['surname'] === ''  && this.registerForm.value['email'] === '' && this.registerForm.value['password'] === '' && this.registerForm.value['password_confirmation'] === ''){
+      this.noData = true
+    }else{
+      this.noData = false
+    }
   }
 }
