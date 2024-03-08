@@ -9,8 +9,7 @@
 
 <ion-content [fullscreen]="true">
   <div *ngIf="buying == false" class="flex flex-col">
-    <img *ngIf="eventImage?.length > 0" class="w-56 h-56  mx-auto mt-10 rounded-lg drop-shadow-md border border-black" [src]="eventImage">
-    <p *ngIf="eventImage?.length == 0" class="mt-20"></p>
+    <img class="w-72 h-72  mx-auto mt-10 rounded-lg drop-shadow-md border border-black" [src]="eventImage ?? '../../assets/images/proximamente.jpg'">
     <p class="text-md font-semibold mx-auto drop-shadow-md mt-6">{{eventName}}</p>
     <div [innerHTML]="eventDescription" class="mx-12 my-4 text-sm"></div>
     <div class="flex flex-col">
@@ -38,7 +37,7 @@
         <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="number" placeholder="1" (keyup)="checkEntries()" formControlName="entry_amount"></ion-input>
         <label class="text-sm font-semibold">Precio:</label>
         <p class="font-bold text-lg">{{entriesPrice}} €</p>
-        <button [ngClass]="{'bg-gray-200': cantBuyEntries,'bg-black': !cantBuyEntries}" class="bg-black text-white font-bold rounded-lg p-3 my-2">Comprar entradas</button>
+        <button [ngClass]="{'bg-gray-200': cantBuyEntries,'bg-black': !cantBuyEntries}" [disabled]="!addOrderForm.valid" class="bg-black text-white font-bold rounded-lg p-3 my-2">Comprar entradas</button>
       </div>
     </form>
     <div (click)="cancelBuy()" class="absolute top-0 right-0 bg-gray-200 p-2 rounded-full mt-[-10px] mr-[-10px]">

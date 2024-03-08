@@ -7,7 +7,7 @@
 <ion-content [fullscreen]="true">
   <div class="flex flex-col">
     <div class="flex flex-col h-[1/3] p-3">
-      <p class="text-lg font-semibold">Próximos eventos</p>
+      <p class="text-lg font-semibold">Próximos Festivales</p>
       <div *ngIf="!noEvents">
         <swiper-container [slidesPerView]="3.5">
           <swiper-slide *ngFor="let event of nextEvents">
@@ -39,7 +39,7 @@
       </div>
     </div>
     <div class="flex flex-col h-[1/3] p-3">
-      <p class="text-lg font-semibold">Próximos espectáculos</p>
+      <p class="text-lg font-semibold">Próximos Espectáculos</p>
       <div *ngIf="!noShows">
         <swiper-container [slidesPerView]="3.5">
           <swiper-slide *ngFor="let show of nextShows">

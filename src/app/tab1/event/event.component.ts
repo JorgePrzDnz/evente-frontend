@@ -48,7 +48,7 @@ export class EventComponent  implements OnInit {
 
     this.addOrderForm = this.fb2.group({
       event_id: ['',[Validators.required]],
-      entry_amount: ['',[Validators.required]],
+      entry_amount: ['',[Validators.required, Validators.min(1)]],
       total_price: ['',[Validators.required]],
       event_name: ['',[Validators.required]],
     })
@@ -68,7 +68,7 @@ export class EventComponent  implements OnInit {
     this.eventService.getEvent(this.eventId).subscribe(response => {
       this.eventName = response.event.name
       this.eventDescription = response.event.description
-      this.eventImage = response.event.images_url
+      this.eventImage = response.event.images_url && response.event.images_url.length > 0 ? response.event.images_url[0] : null
       this.eventPlace = response.event.place
       this.eventPrice = response.event.price
       this.eventDate = response.event.published_at_formatted
@@ -107,8 +107,9 @@ export class EventComponent  implements OnInit {
     this.userService.getPaymentMethod().subscribe(response => {
       if(response.paymentMethod != null){
         this.hasPM = true
-        console.log(this.addOrderForm.value)
-        this.finishBuy()
+        if(this.addOrderForm.value['entry_amount'] != null || this.addOrderForm.value['entry_amount'] != 0){
+          this.finishBuy()
+        }
         this.loadingController.dismiss();
       }else{
         this.firstBuyScreen = false
