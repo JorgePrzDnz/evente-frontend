@@ -49,7 +49,6 @@ export class RegisterComponent {
 
   private handleUserSetting(response: RegisterResponse) {
     this.authService.setToken(response.token)
-    console.log(response.token)
     this.router.navigate(['/tabs/tab1'])
   }
 

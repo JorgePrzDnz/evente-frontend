@@ -36,7 +36,6 @@ export class MyBuysComponent  implements OnInit {
     this.eventService.getBuys().subscribe(response => {
       this.buys = response.orders
       this.loadingController.dismiss();
-      console.log(response.orders)
     }, error => {
       console.log("error");
     })

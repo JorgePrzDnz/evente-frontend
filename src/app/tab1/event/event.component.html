@@ -55,7 +55,7 @@
           <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="text" placeholder="MM/AA" (keyup)="checkCredentials()" formControlName="expiryDate"></ion-input>
           <ion-input class="bg-white mb-2 rounded-md border-solid border-2 border-black !px-2" type="text" placeholder="Tipo tarjeta" (keyup)="checkCredentials()" formControlName="bank"></ion-input>
         </div>
-        <button class="bg-black text-white font-bold rounded-lg p-3" [ngClass]="{'bg-gray-200': noAddData,'bg-black ': !noAddData}" [disabled]="addPaymentMethodForm.pristine">Realizar compra</button>
+        <button class="bg-black text-white font-bold rounded-lg p-3" [ngClass]="{'bg-gray-200': !addPaymentMethodForm.valid,'bg-black ': addPaymentMethodForm.valid}" [disabled]="!addPaymentMethodForm.valid">Realizar compra</button>
       </div>
     </form>
     <div (click)="cancelBuy()" class="absolute top-0 right-0 bg-gray-200 p-2 rounded-full mt-[-10px] mr-[-10px]">

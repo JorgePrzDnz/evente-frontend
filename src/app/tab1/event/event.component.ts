@@ -47,10 +47,7 @@ export class EventComponent  implements OnInit {
     })
 
     this.addOrderForm = this.fb2.group({
-      event_id: ['',[Validators.required]],
       entry_amount: ['',[Validators.required, Validators.min(1)]],
-      total_price: ['',[Validators.required]],
-      event_name: ['',[Validators.required]],
     })
    }
 
@@ -139,7 +136,6 @@ export class EventComponent  implements OnInit {
   }
 
   public disableButton(){
-    console.log(this.addOrderForm.value['entry_amount'])
     if(this.addOrderForm.value['entry_amount'] == null || this.addOrderForm.value['entry_amount'] == 0){
       this.cantBuyEntries = true
     }else{

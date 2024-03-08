@@ -48,7 +48,6 @@ export class LoginComponent{
 
   private handleUserSetting(response: LoginResponse) {
     this.authService.setToken(response.token)
-    console.log(response.token)
     this.router.navigate(['/tabs/tab1'])
   }
 
